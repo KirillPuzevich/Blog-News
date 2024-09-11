@@ -1,0 +1,75 @@
+.dark__btn {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+
+    &:hover {
+        background-color: #afb2b6;
+        ;
+        transform: scale(1.05);
+    }
+}
+
+.light__btn {
+    background-color: #c5c2c2;
+    color: #333;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+
+    &:hover {
+        background-color: #242424;
+        color: #f0f0f0;
+        transform: scale(1.05);
+    }
+}
+
+@media (max-width: 580px) {
+    .dark__btn {
+        border-radius: 20px;
+        padding: 8px 15px;
+        font-size: 17px;
+    }
+
+    .light__btn {
+        border-radius: 20px;
+        padding: 8px 15px;
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 430px) {
+    .dark__btn {
+        border-radius: 19px;
+        padding: 7px 14px;
+        font-size: 16px;
+    }
+
+    .light__btn {
+        border-radius: 19px;
+        padding: 7px 14px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 380px) {
+    .dark__btn {
+        border-radius: 18px;
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    .light__btn {
+        border-radius: 18px;
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+}

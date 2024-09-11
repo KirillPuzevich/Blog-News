@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+  height: 100%;
+}
+
+img {
+  width: 100%;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.black-theme {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
+
+.white-theme {
+  display: flex;
+  justify-content: center;
+  background-color: 	rgb(240, 240, 240);
+  overflow: hidden;
+}
+
+
