@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext } from "react";
 import "./styles.scss";
 import { useSelector } from "react-redux";
 import back from "./img/back.svg";
@@ -6,7 +6,7 @@ import next from "./img/next.svg";
 import backWhite from "./img/backWhite.svg";
 import nextWhite from "./img/nextWhite.svg";
 import { MyContext } from "../hooks/context";
-import { getPage, getCount } from "../../store/selectors/"
+import { getPage, getCount } from "../../store/selectors/";
 
 interface PaginationProps {
   limit: number;
@@ -27,7 +27,10 @@ const getVisiblePages = (page: number, total: number): number[] => {
   }
 };
 
-export const Pagination: FC<PaginationProps> = ({ limit, handleChangePage }) => {
+export const Pagination: FC<PaginationProps> = ({
+  limit,
+  handleChangePage,
+}) => {
   const ctx = useContext(MyContext);
   const page = useSelector(getPage);
   const count = useSelector(getCount);
@@ -69,8 +72,9 @@ export const Pagination: FC<PaginationProps> = ({ limit, handleChangePage }) => 
             ) : null}
             <button
               type="button"
-              className={`pagination__item ${page === pageNumber ? "pagination__item_active" : ""
-                }`}
+              className={`pagination__item ${
+                page === pageNumber ? "pagination__item_active" : ""
+              }`}
               onClick={() => handleChangePage(pageNumber)}
             >
               {pageNumber}

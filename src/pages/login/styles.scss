@@ -1,254 +1,253 @@
 .login {
-    $self: &;
+  $self: &;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+  min-height: calc(100vh - 85px);
+
+  &__btn {
     display: flex;
-    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 30px;
+
+    &-img {
+      height: 35px;
+      width: 35px;
+    }
+  }
+
+  &__wrapper {
+    width: 500px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: 0.3s;
+
+    &:hover {
+      box-shadow: 5px 10px 25px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__title {
+    display: flex;
     justify-content: center;
-    padding-top: 30px;
-    min-height: calc(100vh - 85px);
+    margin-bottom: 35px;
+    font-size: 28px;
+    color: darkblue;
+  }
 
-    &__btn {
-        display: flex;
-        cursor: pointer;
-        width: 100%;
-        margin-bottom: 30px;
+  &__input {
+    border-radius: 5px;
+    margin: 10px 0 25px;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
 
-        &-img {
-            height: 35px;
-            width: 35px;
-        }
+    &:focus {
+      border-color: black;
+      outline: none;
+      box-shadow: 0 0 5px rgba(12, 12, 33, 0.5);
+    }
+  }
+
+  &__save {
+    width: 100%;
+    background-color: darkblue;
+    padding: 15px;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: #003366;
+      transform: scale(1.05);
+    }
+  }
+
+  &__registr {
+    text-align: center;
+    font-size: 18px;
+
+    &-btn {
+      color: #7b61ff;
+      text-decoration: none;
+      margin-left: 5px;
+    }
+  }
+
+  &__label {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  &__dark {
+    #{$self}__wrapper {
+      background-color: rgb(36, 36, 38);
+      border: none;
     }
 
-    &__wrapper {
-        width: 500px;
-        padding: 30px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-        transition: 0.3s;
-
-        &:hover {
-            box-shadow: 5px 10px 25px rgba(0, 0, 0, 0.2);
-        }
+    #{$self}__title {
+      color: rgb(255, 255, 255);
     }
 
-    &__title {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 35px;
-        font-size: 28px;
-        color: darkblue;
+    #{$self}__input {
+      color: rgb(255, 255, 255);
+      background-color: rgb(50, 53, 55);
+      border: none;
     }
 
-    &__input {
-        border-radius: 5px;
-        margin: 10px 0 25px;
-        width: 100%;
-        padding: 10px;
-        font-size: 18px;
-        border: 1px solid #ccc;
-        transition: border-color 0.3s ease;
+    #{$self}__save {
+      background-color: #80858b;
 
-        &:focus {
-            border-color: black;
-            outline: none;
-            box-shadow: 0 0 5px rgba(12, 12, 33, 0.5);
-        }
+      &:hover {
+        background-color: #666;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+      }
     }
 
-    &__save {
-        width: 100%;
-        background-color: darkblue;
-        padding: 15px;
-        border: none;
-        color: #fff;
-        font-size: 16px;
-        margin-bottom: 25px;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: 0.5s;
-
-        &:hover {
-            background-color: #003366;
-            transform: scale(1.05);
-        }
+    #{$self}__registr {
+      color: rgb(255, 255, 255);
     }
 
-    &__registr {
-        text-align: center;
-        font-size: 18px;
-
-        &-btn {
-            color: #7b61ff;
-            text-decoration: none;
-            margin-left: 5px;
-        }
+    #{$self}__label {
+      color: rgb(255, 255, 255);
     }
-
-    &__label {
-        font-weight: bold;
-        font-size: 18px;
-    }
-
-    &__dark {
-
-        #{$self}__wrapper {
-            background-color: rgb(36, 36, 38);
-            border: none;
-        }
-
-        #{$self}__title {
-            color: rgb(255, 255, 255);
-        }
-
-        #{$self}__input {
-            color: rgb(255, 255, 255);
-            background-color: rgb(50, 53, 55);
-            border: none;
-        }
-
-        #{$self}__save {
-            background-color: #80858b;
-
-            &:hover {
-                background-color: #666;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-                transform: scale(1.05);
-            }
-        }
-
-        #{$self}__registr {
-            color: rgb(255, 255, 255);
-        }
-
-        #{$self}__label {
-            color: rgb(255, 255, 255);
-        }
-    }
+  }
 }
 
 @media (max-width: 550px) {
-    .login {
-        min-height: calc(100vh - 78px);
+  .login {
+    min-height: calc(100vh - 78px);
 
-        &__btn {
-            margin-bottom: 20px;
+    &__btn {
+      margin-bottom: 20px;
 
-            &-img {
-                height: 30px;
-                width: 30px;
-            }
-        }
-
-        &__wrapper {
-            width: 400px;
-            padding: 20px;
-        }
-
-        &__title {
-            margin-bottom: 25px;
-            font-size: 24px;
-        }
-
-        &__input {
-            margin: 8px 0 20px;
-            padding: 8px;
-            font-size: 16px;
-        }
-
-        &__save {
-            padding: 12px;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        &__registr {
-            font-size: 16px;
-        }
-
-        &__label {
-            font-size: 16px;
-        }
+      &-img {
+        height: 30px;
+        width: 30px;
+      }
     }
+
+    &__wrapper {
+      width: 400px;
+      padding: 20px;
+    }
+
+    &__title {
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
+
+    &__input {
+      margin: 8px 0 20px;
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    &__save {
+      padding: 12px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    &__registr {
+      font-size: 16px;
+    }
+
+    &__label {
+      font-size: 16px;
+    }
+  }
 }
 
 @media (max-width: 430px) {
-    .login {
-        min-height: calc(100vh - 74px);
+  .login {
+    min-height: calc(100vh - 74px);
 
-        &__btn {
-            margin-bottom: 15px;
+    &__btn {
+      margin-bottom: 15px;
 
-            &-img {
-                height: 25px;
-                width: 25px;
-            }
-        }
-
-        &__wrapper {
-            width: 350px;
-            padding: 15px;
-        }
-
-        &__title {
-            margin-bottom: 20px;
-            font-size: 22px;
-        }
-
-        &__input {
-            margin: 6px 0 18px;
-            padding: 6px;
-            font-size: 15px;
-        }
-
-        &__save {
-            padding: 10px;
-            font-size: 14px;
-            margin-bottom: 18px;
-        }
-
-        &__registr {
-            font-size: 14px;
-        }
-
-        &__label {
-            font-size: 15px;
-        }
+      &-img {
+        height: 25px;
+        width: 25px;
+      }
     }
+
+    &__wrapper {
+      width: 350px;
+      padding: 15px;
+    }
+
+    &__title {
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    &__input {
+      margin: 6px 0 18px;
+      padding: 6px;
+      font-size: 15px;
+    }
+
+    &__save {
+      padding: 10px;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    &__registr {
+      font-size: 14px;
+    }
+
+    &__label {
+      font-size: 15px;
+    }
+  }
 }
 
 @media (max-width: 380px) {
-    .login {
-        min-height: calc(100vh - 70px);
+  .login {
+    min-height: calc(100vh - 70px);
 
-        &__wrapper {
-            width: 290px;
-            padding: 15px;
-        }
-
-        &__title {
-            margin-bottom: 20px;
-            font-size: 20px;
-        }
-
-        &__input {
-            margin: 5px 0 16px;
-            padding: 5px;
-            font-size: 14px;
-        }
-
-        &__save {
-            padding: 8px;
-            font-size: 12px;
-            margin-bottom: 16px;
-        }
-
-        &__registr {
-            font-size: 12px;
-        }
-
-        &__label {
-            font-size: 14px;
-        }
+    &__wrapper {
+      width: 290px;
+      padding: 15px;
     }
+
+    &__title {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    &__input {
+      margin: 5px 0 16px;
+      padding: 5px;
+      font-size: 14px;
+    }
+
+    &__save {
+      padding: 8px;
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+
+    &__registr {
+      font-size: 12px;
+    }
+
+    &__label {
+      font-size: 14px;
+    }
+  }
 }

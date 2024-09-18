@@ -24,8 +24,9 @@ export const SortDropdown: FC<SortDropdownProps> = ({ sortPosts, orderBy }) => {
         <div className="sort__content">
           {fields.map((field) => (
             <button
-              className={`sort__content-item ${orderBy === field ? "sort__content-item_active" : ""
-                }`}
+              className={`sort__content-item ${
+                orderBy === field ? "sort__content-item_active" : ""
+              }`}
               key={field}
               onClick={() => handleSort(field)}
             >

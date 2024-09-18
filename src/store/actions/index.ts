@@ -52,8 +52,8 @@ export const addPostDetailsAction = (postDet: unknown) => ({
   payload: postDet,
 });
 
-//@ts-expect-error
-export const addMiddlewareAction = (searchValue, order, limit, page) => {
+
+export const addMiddlewareAction = ({searchValue, order, limit, page}: IPostQuery) => {
   return (dispatch: AppDispatch) => {
     dispatch(REQUEST_POSTS_ACTION);
     const offset = (page - 1) * limit;
@@ -92,8 +92,7 @@ export const postMiddlewareAction = (postId: number, navigate: NavigateFunction)
 
 
 export const signUpMiddlewareAction = (
-  //@ts-expect-error
-  { name, email, password, group },
+  { name, email, password, group }: ISignUp,
   navigate: NavigateFunction
 ) => {
   return (dispatch: AppDispatch) => {
@@ -131,17 +130,22 @@ export const activationEmailMiddlewareAction = (uid: string, token: string) => {
 };
 
 
-//@ts-expect-error
-export const authorizationMiddlewareAction = (values, navigate: NavigateFunction) => {
-  return (dispatch: AppDispatch) => {
-    fetchToken(values).then((response) => {
-      dispatch(addTokenAction(response))
-      fetchUserInfo(navigate).then((response) =>
-        dispatch(addUserDataAction(response))
-      );
-    });
+
+export const authorizationMiddlewareAction = (values: IAuth, navigate: NavigateFunction, setRequestStatus: (status: number) => void) => {
+  return async (dispatch: AppDispatch) => {
+    const response = await fetchToken(values);
+    
+    if (response.status === 200) { 
+      dispatch(addTokenAction(response));
+      const userInfo = await fetchUserInfo(navigate);
+      dispatch(addUserDataAction(userInfo));
+      setRequestStatus(200); 
+    } else {
+      setRequestStatus(response.status);
+    }
   };
 };
+
 
 
 export const getUserInfoMiddlewareAction = (navigate: NavigateFunction) => {

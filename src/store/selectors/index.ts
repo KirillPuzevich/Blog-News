@@ -8,3 +8,4 @@ export const getPostDetails = (state: AppStore) => state.postDet.content;
 export const getImg = (state: AppStore) => state.img;
 export const getPosts = (state: AppStore) => state.posts;
 export const geSearchValue = (state: AppStore) => state.searchValue;
+export const getUser = (state: AppStore) => state.user.content;

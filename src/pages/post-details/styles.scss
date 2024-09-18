@@ -37,7 +37,7 @@
 
     &-img {
       width: 85%;
-      height: 800px;
+      height: 600px;
       border-radius: 50px;
       margin-bottom: 15px;
     }
@@ -108,6 +108,7 @@
 @media (max-width: 768px) {
   .details {
     margin-top: 30px;
+    min-height: calc(100vh - 209px);
 
     &__container {
       margin-bottom: 20px;
@@ -129,7 +130,7 @@
     &__content {
       &-img {
         width: 85%;
-        height: 600px;
+        height: 500px;
       }
 
       &-text {
@@ -153,6 +154,8 @@
 @media (max-width: 580px) {
   .details {
     margin-top: 25px;
+    min-height: calc(100vh - 193px);
+
 
     &__container {
       margin-bottom: 15px;
@@ -168,18 +171,18 @@
 
     &__title {
       margin-bottom: 11px;
-      font-size: 18px;
+      font-size: 25px;
     }
 
     &__content {
       &-img {
         width: 90%;
-        height: 500px;
+        height: 400px;
       }
 
       &-text {
         width: 90%;
-        font-size: 14px;
+        font-size: 16px;
       }
     }
 
@@ -195,6 +198,24 @@
   }
 }
 
+@media (max-width: 480px) {
+  .details {
+
+    &__content {
+      &-img {
+        width: 95%;
+        height: 400px;
+      }
+    }
+  }
+}
+
+@media (max-width: 430px) {
+  .details {
+    min-height: calc(100vh - 188px);
+  }
+}
+
 @media (max-width: 400px) {
   .details {
 
@@ -202,7 +223,34 @@
       &-img {
         object-fit: cover;
         width: 95%;
-        height: 400px;
+        height: 300px;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .details {
+
+    &__content {
+      &-img {
+        object-fit: cover;
+        width: 95%;
+        height: 300px;
+      }
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .details {
+    min-height: calc(100vh - 185px);
+
+    &__content {
+      &-img {
+        object-fit: cover;
+        width: 95%;
+        height: 300px;
       }
     }
   }

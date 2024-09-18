@@ -1,25 +1,28 @@
-import { useContext, useEffect } from "react";
-import styles from "./styles.scss";
-import { MyContext } from "../../components/hooks/context.tsx";
+import React, {FC, useContext, useEffect } from "react";
+import  "./styles.scss";
+import { MyContext } from "../../components/hooks/context";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserInfoMiddlewareAction } from "../../store/actions/index.ts";
+import { getUserInfoMiddlewareAction } from "../../store/actions";
 import back from "./img/back.svg";
 import backWhite from "./img/backWhite.svg";
-import { Spinner } from "../../components/spinner/index.tsx";
+import { Spinner } from "../../components/spinner";
 import { NotFound } from "../not-found";
+import { getUser } from "../../store/selectors";
 
-export const UserPage = () => {
+
+export const UserPage: FC = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   const ctx = useContext(MyContext);
 
-  const user = useSelector((state) => state.user.content);
+  const user = useSelector(getUser);
 
   useEffect(() => {
+    //@ts-expect-error
     dispatch(getUserInfoMiddlewareAction(navigate));
   }, []);
 

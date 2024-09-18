@@ -15,9 +15,15 @@ import { Spinner } from "../../components/spinner";
 import { Pagination } from "../../components/pagination";
 import { ImgPreview } from "../../components/img-preview";
 import { NoSearchResult } from "../../components/no-search-result";
-import { Header } from "../../components/header";
 import { SortDropdown } from "../../components/sort-post";
-import { getPage, getImg, getOrder, getCount, getPosts, geSearchValue } from "../../store/selectors";
+import {
+  getPage,
+  getImg,
+  getOrder,
+  getCount,
+  getPosts,
+  geSearchValue,
+} from "../../store/selectors";
 
 export const limit = 12;
 
@@ -44,19 +50,15 @@ export const BlogPage: FC = () => {
 
   useEffect(() => {
     //@ts-expect-error
-    dispatch(addMiddlewareAction(searchValue, order, limit, page, count));
-  }, [dispatch, searchValue, order, page, count]);
+    dispatch(addMiddlewareAction({ searchValue, order, limit, page, count }));
+  }, [searchValue, order, page]);
 
   const handleChangePage = (newPage: number) => {
     dispatch(setPage(newPage));
-    //@ts-expect-error
-    dispatch(addMiddlewareAction(searchValue, order, limit, newPage));
   };
 
   const handleOrder = (order: string) => {
     dispatch(setSortedOrder(order));
-    //@ts-expect-error
-    dispatch(addMiddlewareAction(searchValue, order, limit, page));
   };
 
   return (
@@ -85,8 +87,9 @@ export const BlogPage: FC = () => {
               )}
             </div>
             <div
-              className={`blog__wrapper ${!posts.content.length && !posts.loading ? "hidden" : ""
-                }`}
+              className={`blog__wrapper ${
+                !posts.content.length && !posts.loading ? "hidden" : ""
+              }`}
             >
               {posts.content.map((item: any, index: number) => {
                 return (

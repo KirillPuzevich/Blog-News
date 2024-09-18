@@ -1,4 +1,4 @@
-{ "compilerOptions": {
+{"compilerOptions": {
   "target": "ES2015",
   "lib": [
     "dom",

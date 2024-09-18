@@ -3,8 +3,7 @@ import { MyContext } from "../../components/hooks/context.tsx";
 import styles from "./styles.scss";
 import back from "./img/back.svg";
 import backWhite from "./img/backWhite.svg";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authorizationMiddlewareAction } from "../../store/actions/index.ts";
 import { ModalLogin } from "../../components/modalLogin/index.tsx";
@@ -14,14 +13,12 @@ export const Login = () => {
   const ctx = useContext(MyContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userId = useSelector((state) => state.user.content.id);
-
-  const isAuth = localStorage.getItem("isAuth");
+  const user = useSelector((state) => state.user.content);
 
   const [values, setValues] = useState({ email: "", password: "" });
   const [isModalOpen, setModalOpen] = useState(false);
   const [isErrorModalOpen, setErrorModalOpen] = useState(false);
-  const [request, setRequest] = useState(false);
+  const [requestStatus, setRequestStatus] = useState(null);
 
   const handleChangeEmail = (event) => {
     setValues((prevState) => ({ ...prevState, email: event.target.value }));
@@ -32,13 +29,12 @@ export const Login = () => {
   };
 
   const handleSave = () => {
-    setRequest(true);
-    dispatch(authorizationMiddlewareAction(values, navigate));
+    dispatch(authorizationMiddlewareAction(values, navigate, setRequestStatus));
   };
 
   useEffect(() => {
-    if (request) {
-      if (isAuth) {
+    if (requestStatus !== null) {
+      if (requestStatus === 200) {
         setModalOpen(true);
         setErrorModalOpen(false);
       } else {
@@ -46,7 +42,7 @@ export const Login = () => {
         setModalOpen(false);
       }
     }
-  }, [isAuth, request]);
+  }, [requestStatus]);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -55,7 +51,7 @@ export const Login = () => {
 
   const closeErrorModal = () => {
     setErrorModalOpen(false);
-    setRequest(false);
+    setRequestStatus(null);
   };
 
   return (
@@ -70,7 +66,9 @@ export const Login = () => {
             />
           </Link>
           <h1 className="login__title">Login</h1>
-          <label className="login__label" htmlFor="loginEmail">Email</label>
+          <label className="login__label" htmlFor="loginEmail">
+            Email
+          </label>
           <input
             type="text"
             className="login__input"
@@ -79,7 +77,9 @@ export const Login = () => {
             value={values.email}
             onChange={handleChangeEmail}
           />
-          <label className="login__label" htmlFor="loginPass">Password</label>
+          <label className="login__label" htmlFor="loginPass">
+            Password
+          </label>
           <input
             type="password"
             className="login__input"

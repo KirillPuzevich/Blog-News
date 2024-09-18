@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { MyContext } from "../hooks/context";
 import { useDispatch } from "react-redux";
-import { dateUtils } from "../../utils/dateUtils"
+import { dateUtils } from "../../utils/dateUtils";
 import logo from "../header/img/logo.svg";
 import { addImgAction } from "../../store/actions";
 import "./styles.scss";
@@ -52,7 +52,10 @@ export const Post: FC<IPostProps> = ({ post, index, img }) => {
             <strong>Published:</strong> {dateUtils(post.published_at)}
           </p>
           <p className="post__text">
-            <strong>News site:</strong><Link className='post__text-url' to={post.url} target="_blank">{post.news_site}</Link>
+            <strong>News site:</strong>
+            <Link className="post__text-url" to={post.url} target="_blank">
+              {post.news_site}
+            </Link>
           </p>
           <Link to={`${post.id}`} className="post__title">
             {post.title}

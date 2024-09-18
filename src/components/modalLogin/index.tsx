@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 import "./styles.scss";
 
 interface ModalLoginProps {
@@ -11,8 +11,12 @@ export const ModalLogin: FC<ModalLoginProps> = ({ isOpen, onClose }) => {
   return (
     <div className="modal__login">
       <div className="modal__login-container">
-        <h2 className="modal__login-title">Поздравляем, вы успешно авторизовались!</h2>
-        <button className="modal__login-close" onClick={onClose}>Закрыть</button>
+        <h2 className="modal__login-title">
+          Поздравляем, вы успешно авторизовались!
+        </h2>
+        <button className="modal__login-close" onClick={onClose}>
+          Закрыть
+        </button>
       </div>
     </div>
   );

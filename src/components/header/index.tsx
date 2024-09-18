@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext, useEffect } from 'react';
+import React, { FC, useState, useContext } from "react";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,12 +31,10 @@ export const Header: FC = () => {
 
   const handleSearch = () => {
     dispatch(setSearchValue(localSearchValue));
-    //@ts-expect-error
-    dispatch(addMiddlewareAction(localSearchValue, order, limit, page));
   };
 
   const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev);
+    setIsMenuOpen((prev) => !prev);
   };
 
   const closeMenu = () => {
@@ -47,13 +45,13 @@ export const Header: FC = () => {
     <header className={`header ${ctx.isBlackTheme ? "header__dark" : ""}`}>
       <div className="container">
         <div className="header__wrapper">
-          <div className="header__logo">
+          <Link to={"/"} className="header__logo">
             <img
               className="header__logo-img"
               src={ctx.isBlackTheme ? logoWhite : logo}
               alt=""
             />
-          </div>
+          </Link>
           <div className="header__search">
             <input
               className="header__search-txt"
@@ -77,7 +75,7 @@ export const Header: FC = () => {
               alt="image"
             />
           </button>
-          <nav className={`header__nav ${isMenuOpen ? 'open' : ''}`}>
+          <nav className={`header__nav ${isMenuOpen ? "open" : ""}`}>
             <span className="header__close" onClick={toggleMenu}>
               x
             </span>
@@ -90,11 +88,19 @@ export const Header: FC = () => {
               <li className="header__item">
                 {isAuth === "true" ? (
                   isMenuOpen ? (
-                    <Link to="userPage" className="header__link" onClick={toggleMenu}>
+                    <Link
+                      to="userPage"
+                      className="header__link"
+                      onClick={toggleMenu}
+                    >
                       Profile
                     </Link>
                   ) : (
-                    <Link to="userPage" className="header__profile" onClick={toggleMenu}>
+                    <Link
+                      to="userPage"
+                      className="header__profile"
+                      onClick={toggleMenu}
+                    >
                       <img
                         className="header__profile-img"
                         src={ctx.isBlackTheme ? personWhite : person}
@@ -103,7 +109,11 @@ export const Header: FC = () => {
                     </Link>
                   )
                 ) : (
-                  <Link to="login" className="header__link" onClick={toggleMenu}>
+                  <Link
+                    to="login"
+                    className="header__link"
+                    onClick={toggleMenu}
+                  >
                     Login
                   </Link>
                 )}

@@ -17,7 +17,7 @@
     font-size: 35px;
   }
 
-  &__img{
+  &__img {
     width: 400px;
     height: 450px;
     margin-bottom: 15px;
@@ -35,7 +35,6 @@
 
     &:hover {
       background-color: #b3a6f7;
-      ;
       transform: scale(1.05);
     }
   }
@@ -49,17 +48,17 @@
   }
 }
 
-@media (max-width: 768px){
-  .not-found{
+@media (max-width: 768px) {
+  .not-found {
     &__title {
       font-size: 30px;
     }
-  
-    &__img{
+
+    &__img {
       width: 350px;
       height: 400px;
     }
-  
+
     &__btn {
       padding: 6px 28px;
       font-size: 18px;
@@ -67,17 +66,17 @@
   }
 }
 
-@media (max-width: 580px){
-  .not-found{
+@media (max-width: 580px) {
+  .not-found {
     &__title {
       font-size: 28px;
     }
-  
-    &__img{
+
+    &__img {
       width: 300px;
       height: 350px;
     }
-  
+
     &__btn {
       padding: 5px 26px;
       font-size: 17px;

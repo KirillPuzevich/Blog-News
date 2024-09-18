@@ -1,8 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 import "./styles.scss";
 import { useDispatch } from "react-redux";
 import { REMOVE_IMG_ACTION } from "../../store/actions";
-
 
 interface ImgPreviewProps {
   post: {
@@ -23,10 +22,15 @@ export const ImgPreview: FC<ImgPreviewProps> = ({ post }) => {
         <button className="modal__photo-button" onClick={handleCancel}>
           x
         </button>
-        <img className="modal__photo-img" src={post.image_url} alt="" onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.src = "https://placehold.co/600x400";
-            }}/>
+        <img
+          className="modal__photo-img"
+          src={post.image_url}
+          alt=""
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = "https://placehold.co/600x400";
+          }}
+        />
       </div>
     </div>
   );

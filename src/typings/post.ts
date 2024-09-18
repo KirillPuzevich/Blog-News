@@ -1,6 +1,7 @@
 export interface IPostQuery {
-    searchValue: any;
-    order: any;
-    limit: any;
-    page: any;
+    searchValue: string;
+    order: string;
+    limit: number;
+    page: number;
+    count: number;
 }
