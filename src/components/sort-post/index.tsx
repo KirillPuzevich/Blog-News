@@ -8,7 +8,7 @@ interface SortDropdownProps {
 
 export const SortDropdown: FC<SortDropdownProps> = ({ sortPosts, orderBy }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const fields = ["published_at", "id"];
+  const fields = ["publishedAt", "id", "title"];
 
   const handleSort = (field: string) => {
     sortPosts(field);

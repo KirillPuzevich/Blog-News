@@ -15,13 +15,13 @@ export const Login = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.content);
 
-  const [values, setValues] = useState({ email: "", password: "" });
+  const [values, setValues] = useState({ username: "", password: "" });
   const [isModalOpen, setModalOpen] = useState(false);
   const [isErrorModalOpen, setErrorModalOpen] = useState(false);
   const [requestStatus, setRequestStatus] = useState(null);
 
   const handleChangeEmail = (event) => {
-    setValues((prevState) => ({ ...prevState, email: event.target.value }));
+    setValues((prevState) => ({ ...prevState, username: event.target.value }));
   };
 
   const handleChangePass = (event) => {
@@ -58,7 +58,7 @@ export const Login = () => {
     <div className={`login ${ctx.isBlackTheme ? "login__dark" : ""}`}>
       <div className="container">
         <div className="login__wrapper">
-          <Link to={"/blogs"} className="login__btn">
+          <Link to={"/sport-news"} className="login__btn">
             <img
               className="login__btn-img"
               src={ctx.isBlackTheme ? backWhite : back}
@@ -67,14 +67,14 @@ export const Login = () => {
           </Link>
           <h1 className="login__title">Login</h1>
           <label className="login__label" htmlFor="loginEmail">
-            Email
+            Login
           </label>
           <input
             type="text"
             className="login__input"
             id="loginEmail"
             placeholder="Your email"
-            value={values.email}
+            value={values.username}
             onChange={handleChangeEmail}
           />
           <label className="login__label" htmlFor="loginPass">

@@ -12,6 +12,13 @@ import {
   REMOVE_IMG,
   SET_SEARCH_VALUE,
   SORTED_ORDER,
+  CLEAR_SEARCH_VALUE,
+  SET_CREATE_ERRORS,
+  LOADING_IMG,
+  DELETE_POST_ACTION,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAILURE,
+  REMOVE_FAVORITE_SUCCESS,
 } from "../actions/index.ts";
 
 const initialState = {
@@ -31,7 +38,7 @@ const initialState = {
     error: null,
   },
   postDet: {
-    content: [],
+    content: {},
     loading: false,
     loaded: false,
   },
@@ -39,10 +46,16 @@ const initialState = {
   img: null,
   searchValue: "",
   order: "id",
+  createPostErrors: {
+    errors: {},
+  },
+  image: [],
+  deleting: false,
+  deleteError: null,
+  favorites: [],
 };
 
 export const reducer = (state = initialState, action) => {
-  console.log(state);
   switch (action.type) {
     case CHANGE_THEME:
       return {
@@ -59,9 +72,11 @@ export const reducer = (state = initialState, action) => {
         },
       };
 
+    case CLEAR_SEARCH_VALUE:
+      return { ...state, searchValue: '' };
+
     case RECEIVED_USER_DATA:
       const isError = !action.user?.id;
-
       return {
         ...state,
         user: {
@@ -99,6 +114,7 @@ export const reducer = (state = initialState, action) => {
           loaded: true,
         },
       };
+
     case SET_PAGE:
       return { ...state, page: action.payload };
 
@@ -127,6 +143,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         img: action.payload,
       };
+
     case REMOVE_IMG:
       return {
         ...state,
@@ -139,6 +156,38 @@ export const reducer = (state = initialState, action) => {
     case SORTED_ORDER:
       return { ...state, order: action.payload };
 
+    case SET_CREATE_ERRORS:
+      return {
+        ...state,
+        createPostErrors: {
+          errors: action.payload,
+        },
+      };
+
+    case LOADING_IMG:
+      return { ...state, image: action.payload };
+
+    case DELETE_POST_ACTION:
+      return {
+        ...state,
+        deleting: true,
+        deleteError: null,
+      };
+
+    case DELETE_POST_SUCCESS:
+      return {
+        ...state,
+        deleting: false,
+        posts: {
+          ...state.posts,
+          content: state.posts.content.filter((post) => post.id !== action.payload),
+        },
+      };
+      case REMOVE_FAVORITE_SUCCESS:
+      return {
+        ...state,
+        favorites: state.favorites.filter(fav => fav.id !== action.payload)
+      };
     default:
       return state;
   }

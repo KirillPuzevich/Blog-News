@@ -54,6 +54,72 @@
     }
   }
 
+  &__favorites {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: 0.3s;
+    margin-bottom: 20px;
+
+    &__title {
+      font-size: 24px;
+      color: darkblue;
+      margin-bottom: 10px;
+    }
+
+    &__list {
+      list-style: none;
+      padding: 0;
+
+      &-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &-link {
+          color: darkblue;
+          text-decoration: none;
+          font-size: 18px;
+          transition: color 0.3s;
+
+          &:hover {
+            transition: 0.3s;
+            color: darkorange;
+            text-decoration: underline; 
+          }
+        }
+
+        &-button {
+          background-color: darkred;
+          color: white;
+          border: none;
+          padding: 5px 10px;
+          border-radius: 5px;
+          cursor: pointer;
+
+          &:hover {
+            transition: 0.3s;
+            background-color: darkorange;
+          }
+        }
+      }
+    }
+
+    &__empty {
+      color: gray;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 10px;
+    }
+  }
+
   &__exit {
     width: 100%;
     background-color: darkblue;
@@ -73,6 +139,38 @@
   }
 
   &__dark {
+    #{$self}__favorites {
+      border: none;
+      background-color: #121212;
+  
+      &__title {
+        font-size: 24px;
+        color: rgb(255, 255, 255);
+        margin-bottom: 10px;
+      }
+      &__list {
+        &-item {
+
+  
+          &-link {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+  
+            &:hover {
+              color: #7b61ff;
+              text-decoration: underline; 
+            }
+          }
+        }
+  
+        &__empty {
+          color: rgb(255, 255, 255);
+        }
+      }
+    }
+
     #{$self}__wrapper {
       background-color: rgb(36, 36, 38);
       border: none;

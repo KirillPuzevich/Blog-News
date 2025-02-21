@@ -1,11 +1,13 @@
+import { urlApi } from "../serviceWorkerRegistration";
+
 export const fetchToken = (values) => {
-  const URL = "https://studapi.teachmeskills.by/auth/jwt/create/";
+  const URL = `${urlApi}auth/login`;
 
   return fetch(URL, {
     method: "POST",
     body: JSON.stringify(values),
     headers: {
-      "Content-type": "application/json; charset=UTF-8",
+      "Content-Type": "application/json; charset=UTF-8",
     },
   })
     .then((response) => {
@@ -18,34 +20,17 @@ export const fetchToken = (values) => {
       return { status: response.status, data: null };
     })
     .then((response) => {
-      if (response.data && response.data.access && response.data.refresh) {
-        localStorage.setItem('accessToken', response.data.access);
-        localStorage.setItem('refreshToken', response.data.refresh);
-        localStorage.setItem('isAuth', true);
-        return { access: response.data.access, refresh: response.data.refresh, status: response.status }; 
+      if (response.data && response.data.token) {
+        localStorage.setItem('accessToken', response.data.token);
+        localStorage.setItem('isAuth', 'true');
+        localStorage.setItem('role', response.data.role);
+
+        return { access: response.data.token, status: response.status };
       }
       return { status: response.status };
     })
     .catch((e) => {
-      localStorage.setItem('isAuth', false);
-      return { status: 500 }; 
+      localStorage.setItem('isAuth', 'false');
+      return { status: 500 };
     });
 };
-
-
-export const fetchUserActivation = (uid, token) => {
-    const URL = "https://studapi.teachmeskills.by/auth/users/activation/";
-    const data = { uid, token };
-
-    fetch(URL, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-      });
-}

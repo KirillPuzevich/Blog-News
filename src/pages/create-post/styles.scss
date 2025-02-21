@@ -1,0 +1,184 @@
+.create{
+    $self: &;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+    min-height: calc(100vh - 85px);
+
+    &__post {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      
+
+      &-title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+      }
+
+      &-form {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    
+    &__back-btn {
+      display: flex;
+      cursor: pointer;
+      border: none;
+      background-color: #f8f9fa;
+      margin-bottom: 30px;
+    }
+  
+    &__back-img{
+        height: 35px;
+        width: 35px;
+    }
+    
+    
+    
+    .create__post-input_group {
+      margin-bottom: 15px;
+    }
+
+    .create__post-input {
+      max-height: 100%;
+      max-width: 500px; 
+      
+    }
+    
+    .create__post-input,
+    .create__post-lesson {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    
+      &:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+    }
+    
+    .create__post-uploading {
+      margin-bottom: 15px;
+    }
+    
+    .upload__image-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .upload__button {
+      padding: 10px 15px;
+      background-color: #007bff; // Синий цвет фона
+      color: white; // Цвет текста
+      border: none;
+      border-radius: 4px; // Закругленные углы
+      cursor: pointer; // Указатель при наведении
+      font-size: 16px; // Размер шрифта
+      transition: background-color 0.3s; // Плавный переход цвета
+    
+      &:hover {
+        background-color: #0056b3; // Темнее синий при наведении
+      }
+    
+      &:focus {
+        outline: none; // Убираем обводку при фокусе
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); // Добавляем тень при фокусе
+      }
+    }
+    
+    .image__item {
+      position: relative;
+      margin-top: 10px;
+    }
+    
+    .image__item img {
+      border-radius: 4px;
+      width: 300px;
+    }
+    
+    .image__item-btn_wrapper {
+      margin-top: 5px;
+    }
+    
+    .create__post-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .create__post-btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    
+    .create__post-save {
+      background-color: #28a745;
+      color: white;
+    
+      &:hover {
+        background-color: #218838;
+      }
+    }
+    
+    .create__post-cancel {
+      background-color: #ffc107;
+      color: black;
+    
+      &:hover {
+        background-color: #e0a800;
+      }
+    }
+    
+    .create__post-delete {
+      background-color: #dc3545;
+      color: white;
+    
+      &:hover {
+        background-color: #c82333;
+      }
+    }
+    
+    .create__post-error {
+      color: #dc3545;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  }
+
+    @media (max-width: 580px) {
+        .create{
+          min-height: calc(100vh - 78px);
+        }
+    }
+
+    @media (max-width: 431px) {
+      .create{
+        min-height: calc(100vh - 74px);
+      }   
+  }
+
+  @media (max-width: 580px) {
+    .create{
+      min-height: calc(100vh - 78px);
+    }
+}
+
+@media (max-width: 381px) {
+  .create{
+    min-height: calc(100vh - 70px);
+  }
+}

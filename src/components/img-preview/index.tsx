@@ -5,7 +5,7 @@ import { REMOVE_IMG_ACTION } from "../../store/actions";
 
 interface ImgPreviewProps {
   post: {
-    image_url: string;
+    imageUrl: string;
   };
 }
 
@@ -24,7 +24,7 @@ export const ImgPreview: FC<ImgPreviewProps> = ({ post }) => {
         </button>
         <img
           className="modal__photo-img"
-          src={post.image_url}
+          src={post.imageUrl}
           alt=""
           onError={(e) => {
             const target = e.target as HTMLImageElement;

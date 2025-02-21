@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './store';
-import {App} from "./components/app";
+import { App } from "./components/app";
+import { register } from './serviceWorkerRegistration'; // импортируйте функцию регистрации
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -11,4 +12,5 @@ root.render(
   </Provider>
 );
 
-
+// Регистрация сервисного работника
+register();

@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { MyContext } from "../hooks/context";
 import { useDispatch } from "react-redux";
-import { dateUtils } from "../../utils/dateUtils";
+import { dateUtils } from "../../utils";
 import logo from "../header/img/logo.svg";
 import { addImgAction } from "../../store/actions";
 import "./styles.scss";
@@ -11,11 +11,9 @@ import "./styles.scss";
 interface IPostProps {
   post: {
     id: number;
-    image_url: string;
-    published_at: string;
+    imageUrl: string;
+    publishedAt: string;
     title: string;
-    news_site: string;
-    url: string;
   };
   index: number;
   img: string;
@@ -38,7 +36,7 @@ export const Post: FC<IPostProps> = ({ post, index, img }) => {
       <div className="post__wrapper">
         <div className={`post__img `}>
           <img
-            src={post.image_url}
+            src={post.imageUrl}
             alt=""
             onError={(e) => {
               const target = e.target as HTMLImageElement;
@@ -49,13 +47,7 @@ export const Post: FC<IPostProps> = ({ post, index, img }) => {
         </div>
         <div className="post__info">
           <p className="post__date">
-            <strong>Published:</strong> {dateUtils(post.published_at)}
-          </p>
-          <p className="post__text">
-            <strong>News site:</strong>
-            <Link className="post__text-url" to={post.url} target="_blank">
-              {post.news_site}
-            </Link>
+            <strong>Published:</strong> {dateUtils(post.publishedAt)}
           </p>
           <Link to={`${post.id}`} className="post__title">
             {post.title}

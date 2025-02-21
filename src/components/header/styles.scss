@@ -41,48 +41,26 @@
     align-items: center;
   }
 
-  &__search {
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 70%;
-    border: 3px solid transparent;
-    padding: 13px 20px;
-    border-radius: 10px;
-    background-color: rgb(36, 36, 38);
+  &__dropdown {
+    position: absolute;
+    background-color: white; // или другой цвет
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 10; // чтобы он отображался поверх других элементов
 
-    &:focus-within {
-      border-color: #7b61ff;
-      transition: border-color 0.3s ease;
-    }
-
-    &-txt {
-      border: none;
-      width: 100%;
-      outline: none;
-      color: white;
+    &-item {
       font-size: 16px;
-      font-weight: 500;
-      padding-right: 10px;
-      background-color: transparent;
-
-      &::placeholder {
-        font-weight: 500;
-        font-size: 18px;
-        color: rgba(255, 255, 255, 0.7);
+      padding: 10px;
+      &:hover {
+        background-color: #f0f0f0; // цвет при наведении
       }
     }
+  } 
 
-    &-btn {
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
-    }
-
-    &-img {
-      height: 25px;
-      width: 25px;
-    }
+  &__search {
+    display: none;
   }
 
   &__item {
@@ -94,6 +72,21 @@
   }
 
   &__link {
+    color: black;
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 23px;
+    text-decoration: none;
+
+    &:hover {
+      color: #7b61ff;
+      transition: 0.3s;
+    }
+  }
+
+  &__categories {
     color: black;
     background-color: inherit;
     border: none;
@@ -130,6 +123,18 @@
   &__close {
     display: none;
   }
+  
+  &__modal {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-right: 15px;
+
+    &-img {
+      height: 25px;
+      width: 25px;
+    }
+  }
 
   &__dark {
     background: black;
@@ -156,33 +161,26 @@
 @media (max-width: 768px) {
   .header {
 
-    &__profile {
+    &__logo {
       width: 50px;
       height: 50px;
-
+  
       &-img {
-        width: 40px;
+        width: 35px;
       }
     }
 
-    &__logo {
-      display: none;
-    }
+    &__profile {
+      width: 45px;
+      height: 45px;
 
-    &__search {
-      padding: 10px 16px;
-
-      &-txt {
-        font-size: 14px;
-
-        &::placeholder {
-          font-size: 16px;
-        }
+      &-img {
+        width: 35px;
       }
     }
 
     &__link {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
 }
@@ -193,6 +191,10 @@
       display: flex;
     }
 
+    &__logo{
+      display: none;
+    }
+    
     &__nav {
       display: none;
       position: fixed;
@@ -208,6 +210,54 @@
 
       &.open {
         display: flex;
+      }
+    }
+
+    &__modal{
+      display: none;
+    }
+
+    &__search {
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 70%;
+      border: 3px solid transparent;
+      padding: 13px 20px;
+      border-radius: 10px;
+      background-color: rgb(36, 36, 38);
+  
+      &:focus-within {
+        border-color: #7b61ff;
+        transition: border-color 0.3s ease;
+      }
+  
+      &-txt {
+        border: none;
+        width: 100%;
+        outline: none;
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        padding-right: 10px;
+        background-color: transparent;
+  
+        &::placeholder {
+          font-weight: 500;
+          font-size: 18px;
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+  
+      &-btn {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+  
+      &-img {
+        height: 25px;
+        width: 25px;
       }
     }
 
@@ -252,5 +302,58 @@
         }
       }
     }
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); // Полупрозрачный фон
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; // Убедитесь, что модальное окно выше других элементов
+}
+
+.modal__content {
+  background: #fff; // Белый фон для содержимого
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  width: 400px; // Ширина модального окна
+  position: relative;
+}
+
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px; // Размер шрифта для кнопки закрытия
+  color: #333; // Цвет для кнопки закрытия
+}
+
+.modal__search-input {
+  width: 100%; // Полная ширина
+  padding: 10px;
+  border: 1px solid #ccc; // Цвет рамки
+  border-radius: 4px; // Скругление углов
+  margin-bottom: 10px; // Отступ снизу
+}
+
+.modal__search-btn {
+  background: #007bff; // Цвет кнопки
+  color: #fff; // Цвет текста кнопки
+  border: none; // Без рамки
+  border-radius: 4px; // Скругление углов
+  padding: 10px 15px; // Внутренние отступы
+  cursor: pointer; // Указатель при наведении
+  width: 100%; // Полная ширина
+  
+  &:hover {
+    background: #0056b3; // Темнее при наведении
   }
 }

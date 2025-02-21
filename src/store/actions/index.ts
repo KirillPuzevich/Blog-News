@@ -1,10 +1,11 @@
-import { fetchUserActivation, fetchToken } from "../../api/auth";
+import { fetchToken } from "../../api/auth";
 import { fetchUserInfo } from "../../api/user";
 import { AppDispatch, AppStore } from '..';
 import { NavigateFunction } from 'react-router-dom';
 import { IPostQuery } from '../../typings/post';
 import { IAuth } from '../../typings/auth';
 import { ISignUp } from '../../typings/signUp';
+import { urlApi } from "../../serviceWorkerRegistration";
 
 export const CHANGE_THEME = "CHANGE_THEME";
 export const POST_USER_DATA = "POST_USER_DATA";
@@ -19,15 +20,43 @@ export const ADD_IMG = "ADD_IMG";
 export const REMOVE_IMG = "REMOVE_IMG";
 export const SET_SEARCH_VALUE = "SET_SEARCH_VALUE";
 export const SORTED_ORDER = "SORTED_ORDER";
+export const CLEAR_SEARCH_VALUE = "CLEAR_SEARCH_VALUE";
+export const SET_CREATE_ERRORS = 'SET_CREATE_ERRORS';
+export const LOADING_IMG = 'LOADING_IMG'
+export const DELETE_POST = 'DELETE_POST_ACTION';
+export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';
+export const REMOVE_FAVORITE_SUCCESS = 'REMOVE_FAVORITE_SUCCESS';
 
 export const REQUEST_POST_ACTION = { type: REQUEST_POST };
+export const DELETE_POST_ACTION = {type: DELETE_POST};
 export const CHANGE_THEME_ACTION = { type: CHANGE_THEME };
 export const POST_USER_DATA_ACTION = { type: POST_USER_DATA };
 export const REQUEST_POSTS_ACTION = { type: REQUEST_POSTS };
 export const REMOVE_IMG_ACTION = { type: REMOVE_IMG };
+
+export const setDeletePostSuccess = (postId: number) => ({
+  type: DELETE_POST_SUCCESS,
+  payload: postId,
+});
+
+export const removeFavorite = (categoryId: string) => ({
+  type: REMOVE_FAVORITE_SUCCESS, payload: categoryId,
+});
+
 export const setSortedOrder = (order: string) => ({
   type: SORTED_ORDER,
   payload: order,
+});
+export const loadingImage = (image: unknown) => ({
+  type: LOADING_IMG,
+  payload: image,
+});
+export const clearSearchValue = () => ({
+  type: CLEAR_SEARCH_VALUE,
+});
+export const setCreateErrors = (createPostErrors:unknown) => ({
+  type: SET_CREATE_ERRORS,
+  payload: createPostErrors,
 });
 export const addImgAction = (img: string) => ({ type: ADD_IMG, payload: img });
 export const addUserDataAction = (user: unknown) => ({
@@ -53,27 +82,35 @@ export const addPostDetailsAction = (postDet: unknown) => ({
 });
 
 
-export const addMiddlewareAction = ({searchValue, order, limit, page}: IPostQuery) => {
+export const addMiddlewareAction = ({searchValue, order, limit, page}: IPostQuery, url:string) => {
   return (dispatch: AppDispatch) => {
     dispatch(REQUEST_POSTS_ACTION);
     const offset = (page - 1) * limit;
-    const URL = `https://api.spaceflightnewsapi.net/v4/blogs/?limit=${limit}&offset=${offset}${searchValue ? `&title_contains=${searchValue}` : ""
-      }${order ? `&ordering=${order}` : ""
-      }`
-    fetch(URL)
-      .then((response) => response.json())
-      .then(({ results, count }) => {
-        dispatch(addPostsAction({ results, count }));
+
+    // Формируем строку запроса
+    const query = `?limit=${limit}&offset=${offset}${searchValue ? `&search=${searchValue}` : ""}${order ? `&ordering=${order}` : ""}`;
+    const fullURL = `${url}${query}`;
+
+    fetch(fullURL)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(({result, count}) => { // Обратите внимание на 'result' вместо 'results'
+        dispatch(addPostsAction({ results: result, count })); // Здесь мы передаем результат
       })
       .catch((e) => console.log(e));
   };
 };
 
-export const postMiddlewareAction = (postId: number, navigate: NavigateFunction) => {
+
+export const postMiddlewareAction = (postId: number, navigate: NavigateFunction, url:string) => {
   return (dispatch: AppDispatch) => {
     dispatch(REQUEST_POST_ACTION);
 
-    const URL = `https://api.spaceflightnewsapi.net/v4/blogs/${postId}/`;
+    const URL = `${url}/${postId}`;
 
     fetch(URL)
       .then((response) => response.json())
@@ -90,46 +127,65 @@ export const postMiddlewareAction = (postId: number, navigate: NavigateFunction)
   };
 };
 
+export const deletePostAction = (postId: number, navigate: NavigateFunction, url: string, nav: string) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(DELETE_POST_ACTION);
+      await fetch(`${url}/${postId}`, {
+        method: 'DELETE',
+      });
+      dispatch(setDeletePostSuccess(postId));
+      dispatch(REQUEST_POSTS_ACTION);
+      navigate(nav);
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
+};
 
 export const signUpMiddlewareAction = (
-  { name, email, password, group }: ISignUp,
+  { username, email, password }: ISignUp,
   navigate: NavigateFunction
 ) => {
   return (dispatch: AppDispatch) => {
     dispatch(POST_USER_DATA_ACTION);
 
-    const URL = "https://studapi.teachmeskills.by/auth/users/";
+    const URL = `${urlApi}auth/registration`;
 
     fetch(URL, {
       method: "POST",
       body: JSON.stringify({
-        username: name,
+        username,
         email,
         password,
-        course_group: group,
       }),
       headers: {
-        "Content-type": "application/json; charset=UTF-8",
+        "Content-Type": "application/json; charset=UTF-8",
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+            throw new Error(errorData.message || "Registration failed");
+          });
+        }
+        return response.json();
+      })
       .then((json) => {
+        console.log("Response from server:", json);
         dispatch(addUserDataAction(json));
 
-        if (json.id) {
-          navigate("/registrDone", { state: { email } });
+        // Проверяем наличие id в ответе
+        if (json) {
+          navigate("/login"); // Измените на нужный вам путь
         }
+      })
+      .catch((error) => {
+        console.error("Registration error:", error);
+        // Обработка ошибок, например, показать сообщение пользователю
       });
   };
 };
-
-export const activationEmailMiddlewareAction = (uid: string, token: string) => {
-  return (dispatch: AppDispatch) => {
-    fetchUserActivation(uid, token);
-  };
-};
-
-
 
 export const authorizationMiddlewareAction = (values: IAuth, navigate: NavigateFunction, setRequestStatus: (status: number) => void) => {
   return async (dispatch: AppDispatch) => {
@@ -149,9 +205,32 @@ export const authorizationMiddlewareAction = (values: IAuth, navigate: NavigateF
 
 
 export const getUserInfoMiddlewareAction = (navigate: NavigateFunction) => {
-  return (dispatch: AppDispatch) => {
-    fetchUserInfo(navigate).then((response) =>
-      dispatch(addUserDataAction(response))
-    );
+  return async (dispatch: AppDispatch) => {
+    const response = await fetchUserInfo(navigate);
+    if (response) {
+      dispatch(addUserDataAction(response));
+    }
+  };
+};
+
+// actions.js
+export const removeFavoriteAction = (categoryId: string) => {
+  return async (dispatch: AppDispatch) => {
+    const response = await fetch(`${urlApi}api/me/favorites`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify({ categoryId: categoryId.toString() }),
+    });
+
+    if (response.ok) {
+      dispatch(removeFavorite(categoryId));
+      return true; // Возвращаем результат
+    } else {
+      console.error("Ошибка при удалении категории из избранного");
+      return false; // Возвращаем результат в случае ошибки
+    }
   };
 };
