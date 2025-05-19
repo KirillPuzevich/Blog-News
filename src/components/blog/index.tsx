@@ -28,7 +28,7 @@ export const limit = 12;
 interface BlogProps {
   apiUrl: string;
   createPostPath: string;
-  categoryId: string;
+  categoryId: string; 
 }
 
 export const Blog: FC<BlogProps> = ({ apiUrl, createPostPath, categoryId }) => {
@@ -41,7 +41,7 @@ export const Blog: FC<BlogProps> = ({ apiUrl, createPostPath, categoryId }) => {
   const posts = useSelector(getPosts);
   const searchValue = useSelector(geSearchValue);
   const page = useSelector(getPage);
-
+  
   const [role, setRole] = useState<string | null>(localStorage.getItem("role"));
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export const Blog: FC<BlogProps> = ({ apiUrl, createPostPath, categoryId }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`, // Assuming you're using JWT
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`, 
       },
       body: JSON.stringify({ categoryId }),
     });
@@ -90,6 +90,14 @@ export const Blog: FC<BlogProps> = ({ apiUrl, createPostPath, categoryId }) => {
     }
   };
 
+  // Объект для сопоставления названий сортировки
+  const sortFieldNames: { [key: string]: string } = {
+    publishedAt: "Дате публикации",
+    id: "ID",
+    title: "Заголову",
+    liked: "Понравившимся",
+  };
+
   return (
     <section className={`blog ${ctx.isBlackTheme ? "blog__dark" : ""}`}>
       <div className="container">
@@ -99,18 +107,20 @@ export const Blog: FC<BlogProps> = ({ apiUrl, createPostPath, categoryId }) => {
           <NoSearchResult />
         ) : (
           <>
-            {searchValue && <p className="blog__search">Search result: {searchValue}</p>}
+            {searchValue && <p className="blog__search">Результат поиска: {searchValue}</p>}
             <div className="blog__top">
               <SortDropdown sortPosts={handleOrder} orderBy={orderBy} />
-              <p className="blog__top-sorted">Sorted by: <strong>{orderBy}</strong></p>
+              <p className="blog__top-sorted">
+                Сортировка по: <strong>{sortFieldNames[orderBy]}</strong> {/* Отображение на русском */}
+              </p>
               {role && ( 
                 <div className="blog__top-container">
                   <button className="blog__top-container_btn" onClick={addFavorites}>
-                    Add to favorites
+                    Добавить в избранное
                   </button>
                   {role === "ROLE_ADMIN" && (
                     <button className="blog__top-container_btn" onClick={goCreate}>
-                      Create Post
+                      Создать новость
                     </button>
                   )}
                 </div>
@@ -118,7 +128,13 @@ export const Blog: FC<BlogProps> = ({ apiUrl, createPostPath, categoryId }) => {
             </div>
             <div className="blog__wrapper">
               {posts.content.map((item: any, index: number) => (
-                <Post post={item} img={item} index={index} key={index} />
+                <Post 
+                  post={item} 
+                  img={item}  
+                  index={index} 
+                  key={index} 
+                  categoryId={categoryId} 
+                />
               ))}
             </div>
             <Pagination limit={limit} handleChangePage={handleChangePage} />
@@ -128,4 +144,4 @@ export const Blog: FC<BlogProps> = ({ apiUrl, createPostPath, categoryId }) => {
       {img && <ImgPreview post={img} />}
     </section>
   );
-}
+};

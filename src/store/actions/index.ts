@@ -82,7 +82,7 @@ export const addPostDetailsAction = (postDet: unknown) => ({
 });
 
 
-export const addMiddlewareAction = ({searchValue, order, limit, page}: IPostQuery, url:string) => {
+export const addMiddlewareAction = ({ searchValue, order, limit, page }: IPostQuery, url: string) => {
   return (dispatch: AppDispatch) => {
     dispatch(REQUEST_POSTS_ACTION);
     const offset = (page - 1) * limit;
@@ -91,14 +91,24 @@ export const addMiddlewareAction = ({searchValue, order, limit, page}: IPostQuer
     const query = `?limit=${limit}&offset=${offset}${searchValue ? `&search=${searchValue}` : ""}${order ? `&ordering=${order}` : ""}`;
     const fullURL = `${url}${query}`;
 
-    fetch(fullURL)
+    // Получаем токен из локального хранилища
+    const token = localStorage.getItem("accessToken");
+
+    fetch(fullURL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}), // Добавляем токен, если он существует
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then(({result, count}) => { // Обратите внимание на 'result' вместо 'results'
+      .then(({ result, count }) => {
+        // Обратите внимание на 'result' вместо 'results'
         dispatch(addPostsAction({ results: result, count })); // Здесь мы передаем результат
       })
       .catch((e) => console.log(e));

@@ -12,9 +12,9 @@ export const NoSearchResult: FC = () => {
   return (
     <div className="no-result">
       <img className="no-result__img" src={notFound} alt="No results found" />
-      <h2 className="no-result__title">No searched result!</h2>
+      <h2 className="no-result__title">Ничего не найдено!</h2>
       <button className="no-result__btn" onClick={handleClickBack}>
-        Back
+        Назад
       </button>
     </div>
   );

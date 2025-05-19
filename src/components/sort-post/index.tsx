@@ -8,7 +8,16 @@ interface SortDropdownProps {
 
 export const SortDropdown: FC<SortDropdownProps> = ({ sortPosts, orderBy }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const fields = ["publishedAt", "id", "title"];
+  
+  // Объект для сопоставления сортировок
+  const sortFieldNames: { [key: string]: string } = {
+    publishedAt: "Дата публикации",
+    id: "ID",
+    title: "Заголовок",
+    liked: "Понравившиеся",
+  };
+
+  const fields = Object.keys(sortFieldNames);
 
   const handleSort = (field: string) => {
     sortPosts(field);
@@ -18,7 +27,7 @@ export const SortDropdown: FC<SortDropdownProps> = ({ sortPosts, orderBy }) => {
   return (
     <div className="sort">
       <button className="sort__btn" onClick={() => setIsOpen(!isOpen)}>
-        Select sort
+        Тип сортировки
       </button>
       {isOpen && (
         <div className="sort__content">
@@ -30,14 +39,14 @@ export const SortDropdown: FC<SortDropdownProps> = ({ sortPosts, orderBy }) => {
               key={field}
               onClick={() => handleSort(field)}
             >
-              {field}
+              {sortFieldNames[field]} {/* Отображение на русском */}
             </button>
           ))}
           <button
             className="sort__content-close"
             onClick={() => setIsOpen(false)}
           >
-            Close
+            Закрыть
           </button>
         </div>
       )}

@@ -38,7 +38,7 @@ export const Header: FC = () => {
 
   const handleSearch = () => {
     dispatch(setSearchValue(localSearchValue));
-    setIsSearchModalOpen(false); // Закрыть модальное окно после поиска
+    setIsSearchModalOpen(false); 
   };
 
   useEffect(() => {
@@ -102,27 +102,27 @@ export const Header: FC = () => {
             </button>
             <li style={{ display: isMenuOpen ? 'block' : 'none' }} className="header__item">
                 <Link to="/" className="header__link" onClick={closeMenu}>
-                  Home
+                  Главная
                 </Link>
               </li>
               <li className="header__item">
                 <Link to="/sport-news" className="header__link" onClick={closeMenu}>
-                  Sport
+                  Спорт
                 </Link>
               </li>
               <li className="header__item">
                 <Link to="/cultural-news" className="header__link" onClick={closeMenu}>
-                  Cultural
+                  Культура
                 </Link>
               </li>
               <li className="header__item">
                 <Link to="/entertainment-news" className="header__link" onClick={closeMenu}>
-                  Entertainment
+                  Развлечения
                 </Link>
               </li>
               <li className="header__item">
                 <Link to="/technology-news" className="header__link" onClick={closeMenu}>
-                  Technology
+                  Технологии
                 </Link>
               </li>
               <li className="header__item">
@@ -133,7 +133,7 @@ export const Header: FC = () => {
                       className="header__link"
                       onClick={toggleMenu}
                     >
-                      Profile
+                      Профиль
                     </Link>
                   ) : (
                     <Link
@@ -154,7 +154,7 @@ export const Header: FC = () => {
                     className="header__link"
                     onClick={toggleMenu}
                   >
-                    Login
+                    Логин
                   </Link>
                 )}
               </li>

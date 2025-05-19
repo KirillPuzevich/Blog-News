@@ -1,4 +1,4 @@
-import React , {useContext} from "react";
+import React, { useContext } from "react";
 import './styles.scss';
 import { MyContext } from "../../components/hooks/context";
 

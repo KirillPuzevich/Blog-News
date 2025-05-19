@@ -36,17 +36,17 @@ export const Registration = () => {
   const validate = () => {
     const newErrors = {};
     if (!values.username) {
-      newErrors.username = "Name is required.";
+      newErrors.username = "Требуется логин.";
     }
     if (!values.email) {
-      newErrors.email = "Email is required";
+      newErrors.email = "Требуется емаил";
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-      newErrors.email = "Email is invalid";
+      newErrors.email = "Email недействителен";
     }
     if (!values.password) {
-      newErrors.password = "Password is required.";
+      newErrors.password = "Требуется пароль.";
     } else if (values.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long.";
+      newErrors.password = "Пароль должен состоять из минимум 6 символов.";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -85,18 +85,18 @@ export const Registration = () => {
               alt="back"
             />
           </Link>
-          <h1 className="registration__title">Registration</h1>
+          <h1 className="registration__title">Регистрация</h1>
           {errors.global && (
         <p className="registration__error">{errors.global}</p>
       )}
           <label className="registration__label" htmlFor="registrationName">
-            Name
+            Логин
           </label>
           <input
             type="text"
             className="registration__input"
             id="registrationName"
-            placeholder="Your name"
+            placeholder="Ваш логин"
             value={values.username}
             onChange={handleChangeName}
           />
@@ -104,13 +104,13 @@ export const Registration = () => {
             <p className="registration__error">{errors.username}</p>
           )}
           <label className="registration__label" htmlFor="registrationEmail">
-            Email
+            Почта
           </label>
           <input
             type="text"
             className="registration__input"
             id="registrationEmail"
-            placeholder="Your email"
+            placeholder="Ваш почта"
             value={values.email}
             onChange={handleChangeEmail}
           />
@@ -118,13 +118,13 @@ export const Registration = () => {
             <p className="registration__error">{errors.email}</p>
           )}
           <label className="registration__label" htmlFor="registrationPass">
-            Password
+            Пароль
           </label>
           <input
             type="password"
             className="registration__input"
             id="registrationPass"
-            placeholder="Password"
+            placeholder="Пароль"
             value={values.password}
             onChange={handleChangePass}
           />
@@ -132,12 +132,12 @@ export const Registration = () => {
             <p className="registration__error">{errors.password}</p>
           )}
           <button className="registration__save" onClick={handleSave}>
-            Sign Up
+            Войти
           </button>
           <div className="registration__login">
-            Already have an account?
+            У вас есть аккаунт?
             <Link to={"/login"} className="registration__login-btn">
-              Login
+              Логин
             </Link>
           </div>
         </div>

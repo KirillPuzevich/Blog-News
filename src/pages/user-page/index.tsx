@@ -77,10 +77,10 @@ export const UserPage: FC = () => {
               alt="back"
             />
           </Link>
-          <h1 className="user__title">Profile</h1>
+          <h1 className="user__title">Профиль</h1>
           <div className="user__content">
             <p className="user__content-text">
-              Name: <strong className="user__content-strong">{user.username}</strong>
+              Логин: <strong className="user__content-strong">{user.username}</strong>
             </p>
             <p className="user__content-text">
               Email: <strong className="user__content-strong">{user.email}</strong>
@@ -91,7 +91,7 @@ export const UserPage: FC = () => {
           </div>
 
           <div className="user__favorites">
-            <h3 className="user__favorites__title">Favorites:</h3>
+            <h3 className="user__favorites__title">Избранное:</h3>
             {user.favorites.length > 0 ? (
               <ul className="user__favorites__list">
                 {user.favorites.map((favorite: { id: number; name: string }) => (
@@ -113,7 +113,7 @@ export const UserPage: FC = () => {
           </div>
 
           <button className="user__exit" onClick={handleClickExit}>
-            Log out
+           Выйти
           </button>
         </div>
       </div>

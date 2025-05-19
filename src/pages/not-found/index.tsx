@@ -25,9 +25,9 @@ export const NotFound: FC = () => {
             src={ctx.isBlackTheme ? errorWhite : error}
             alt=""
           />
-          <h1 className="not-found__title">Page not found</h1>
+          <h1 className="not-found__title">Страница не найдена</h1>
           <button className="not-found__btn" onClick={handleClickBack}>
-            Back
+            Назад
           </button>
         </div>
       </div>

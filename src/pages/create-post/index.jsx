@@ -13,17 +13,17 @@ const validationSchema = {
   title: {
     type: "string",
     min: 1,
-    messages: { stringMin: "Title is too short" },
+    messages: { stringMin: "Заголовок слишком короткий" },
   },
   categoryId: {
     type: "number",
     min: 1,
-    messages: { numberMin: "Category ID is required" },
+    messages: { numberMin: "Требуется ID категории" },
   },
   summary: {
     type: "string",
     min: 1,
-    messages: { stringMin: "Summary is required" },
+    messages: { stringMin: "Требуется описание" },
   },
 };
 
@@ -69,12 +69,12 @@ export const CreatePost = ({ createPost, categoryId, nav }) => {
       try {
         const response = await createPost(data);
         if (response.id) {
-          alert("Post created successfully!");
+          alert("Новость успешно добавлена!");
           navigate(nav);
         }
       } catch (error) {
-        console.error("Error creating post:", error);
-        alert("There was an error creating the post. Please try again.");
+        console.error("Ошибка при создании поста:", error);
+        alert("Произошла ошибка при создании поста. Пожалуйста, попробуйте снова.");
       } finally {
         setIsLoading(false);
       }
@@ -100,6 +100,12 @@ export const CreatePost = ({ createPost, categoryId, nav }) => {
     ) : null;
   };
 
+   const handleReset = () => {
+    setTitle("");
+    setSummary("");
+    dispatch(loadingImage([])); // Сбросить изображения, если необходимо
+  };
+
   useEffect(() => {
     return () => {
       dispatch(setCreateErrors([]));
@@ -118,15 +124,15 @@ export const CreatePost = ({ createPost, categoryId, nav }) => {
               alt="back"
             />
           </button>
-          <h1 className="create__post-title">Add Post</h1>
-          <form className="create__post-form" onSubmit={handleSubmit}>
+          <h1 className="create__post-title">Добавить Новость</h1>
+          <form className="create__post-form" onSubmit={handleSubmit} onReset={handleReset}>
             <div className="create__post-input_group">
               <input
                 type="text"
                 name="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Title"
+                placeholder="Заголовок"
                 className="create__post-input"
               />
               {makeErrorText("title")}
@@ -146,7 +152,7 @@ export const CreatePost = ({ createPost, categoryId, nav }) => {
                 name="summary"
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
-                placeholder="Summary"
+                placeholder="Описание"
                 className="create__post-input"
               />
               {makeErrorText("summary")}
@@ -160,7 +166,7 @@ export const CreatePost = ({ createPost, categoryId, nav }) => {
                       onClick={onImageUpload}
                       className="upload__button"
                     >
-                      Upload new
+                      Добавить фото
                     </button>
                     {imageList.map((image, index) => (
                       <div key={index} className="image__item">
@@ -179,12 +185,12 @@ export const CreatePost = ({ createPost, categoryId, nav }) => {
             <div className="create__post-actions">
               <input
                 type="reset"
-                value="Cancel"
+                value="Очистить"
                 className="create__post-btn create__post-cancel"
               />
               <input
                 type="submit"
-                value={isLoading ? "Creating..." : "Add post"}
+                value={isLoading ? "Создание..." : "Создать"}
                 className="create__post-btn create__post-save"
                 disabled={isLoading}
               />

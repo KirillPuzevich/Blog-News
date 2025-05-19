@@ -44,7 +44,16 @@ const PostDetailsComponent = ({ post, onDelete, isLoading, nav }) => {
     setModalOpen(false);
   };
 
-  if (isLoading || !post || post.length === 0) {
+  const formatSummary = (summary) => {
+    const formattedSummary = summary.split(/\n\n+/).map((para, index) => (
+      <p key={index} className="details__content-text-paragraph">
+        {para}
+      </p>
+    ));
+    return formattedSummary;
+  };
+
+  if (isLoading || !post || !post.summary) {
     return <Spinner />;
   }
 
@@ -53,12 +62,12 @@ const PostDetailsComponent = ({ post, onDelete, isLoading, nav }) => {
       <div className="container">
         <div className="details__container">
           <Link to={nav} className="details__container-btn">
-            Back
+            Назад
           </Link>
           <p className="details__container-post"> / Post {post.id}</p>
           {role === "ROLE_ADMIN" && (
             <button className="details__container-delete" onClick={() => setModalOpen(true)}>
-              Delete Post
+              Удалить новость
             </button>
           )}
         </div>
@@ -70,7 +79,9 @@ const PostDetailsComponent = ({ post, onDelete, isLoading, nav }) => {
             alt=""
             onError={(e) => (e.target.src = "https://placehold.co/600x400")}
           />
-          <p className="details__content-text">{post.summary}</p>
+          <div className="details__content-text">
+            {formatSummary(post.summary)}
+          </div>
           <div className="details__actions">
             <a
               href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}

@@ -65,36 +65,36 @@ export const Login = () => {
               alt="back"
             />
           </Link>
-          <h1 className="login__title">Login</h1>
+          <h1 className="login__title">Логин</h1>
           <label className="login__label" htmlFor="loginEmail">
-            Login
+            Логин
           </label>
           <input
             type="text"
             className="login__input"
             id="loginEmail"
-            placeholder="Your email"
+            placeholder="Ваш логин"
             value={values.username}
             onChange={handleChangeEmail}
           />
           <label className="login__label" htmlFor="loginPass">
-            Password
+            Пароль
           </label>
           <input
             type="password"
             className="login__input"
             id="loginPass"
-            placeholder="Password"
+            placeholder="Пароль"
             value={values.password}
             onChange={handleChangePass}
           />
           <button className="login__save" onClick={handleSave}>
-            Sign In
+            Войти
           </button>
           <div className="login__registr">
-            Don't have an account?
+            У вас нет аккаунта?
             <Link to={"/registration"} className="login__registr-btn">
-              Registration
+              Регистрация
             </Link>
           </div>
         </div>

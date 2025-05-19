@@ -14,7 +14,7 @@ export const Search: FC<SearchProps> = ({ onSearch, placeholder = "Поиск" }
   };
 
   const handleSearch = () => {
-    onSearch(searchValue); // Call the onSearch prop with the current search value
+    onSearch(searchValue); 
   };
 
   return (

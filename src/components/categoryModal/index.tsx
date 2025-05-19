@@ -16,16 +16,16 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose })
         <span className="category-modal__close" onClick={onClose}>×</span>
         <ul className="category-modal__list">
           <li className="category-modal__item">
-            <Link to="/sport-news" onClick={onClose}>Sport</Link>
+            <Link to="/sport-news" onClick={onClose}>Спорт</Link>
           </li>
           <li className="category-modal__item">
-            <Link to="/cultural-news" onClick={onClose}>Cultural</Link>
+            <Link to="/cultural-news" onClick={onClose}>Культура</Link>
           </li>
           <li className="category-modal__item">
-            <Link to="/entertainment-news" onClick={onClose}>Entertainment</Link>
+            <Link to="/entertainment-news" onClick={onClose}>Развлечения</Link>
           </li>
           <li className="category-modal__item">
-            <Link to="/technology-news" onClick={onClose}>Technology</Link>
+            <Link to="/technology-news" onClick={onClose}>Технологии</Link>
           </li>
         </ul>
       </div>

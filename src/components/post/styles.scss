@@ -5,6 +5,39 @@
   width: auto;
   border-radius: 10px;
 
+  &_like-container {
+  display: flex;
+  align-items: center; 
+  margin-top: 5px; 
+}
+
+&_likes-count {
+  margin-left: 10px; 
+  font-size: 18px;
+  color: #000; 
+}
+
+&_like-button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+&_like-icon {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+}
+
+&_like-button-none {
+  display: none; 
+}
+
+&_like-count-none{
+  margin-left: 0;
+}
+
   &__wrapper {
     display: flex;
     flex-direction: column;
@@ -30,7 +63,7 @@
     padding: 20px 15px;
     background-color: #ffffff;
     border-radius: 0 0 10px 10px;
-    height: 150px;
+    height: 180px;
     border-top: 1px solid;
   }
 
@@ -98,6 +131,12 @@
         transition: 0.3s;
       }
     }
+    #{$self}_likes-count{
+      color: rgb(255, 255, 255);
+    }
+    #{$self}_like-count-none{
+      color: rgb(255, 255, 255);
+    }
   }
 }
 
@@ -112,7 +151,7 @@
 
     &__info {
       padding: 20px 15px;
-      height: 180px;
+      height: 195px;
     }
 
     &__date {
@@ -143,7 +182,7 @@
 
     &__info {
       padding: 22px 15px;
-      height: 180px;
+      height: 190px;
     }
 
     &__date {
@@ -174,7 +213,7 @@
 
     &__info {
       padding: 20px 15px;
-      height: 160px;
+      height: 190px;
     }
 
     &__date {

@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
   element: JSX.Element;
-  role: string | null; // Роль пользователя из localStorage
+  role: string | null; 
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element, role }) => {

@@ -17,7 +17,7 @@ export const ModeButton: FC = () => {
       className={isBlackTheme ? "dark__btn" : "light__btn"}
       onClick={toggleTheme}
     >
-      {isBlackTheme ? "Light theme" : "Dark theme"}
+      {isBlackTheme ? "Светлая тема" : "Темная тема"}
     </button>
   );
 };
